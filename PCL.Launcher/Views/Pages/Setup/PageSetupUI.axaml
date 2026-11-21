@@ -110,6 +110,36 @@
                 </StackPanel>
             </ui:MyCard>
 
+            <ui:MyCard x:Name="CardMacOS"
+                       Margin="0,0,0,15"
+                       IsVisible="False"
+                       Title="{loc:Loc Setup.Ui.MacOS.Title}">
+                <StackPanel Margin="25,40,25,15">
+                    <Grid Height="28">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"
+                                              SharedSizeGroup="Name1" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="92"
+                                              SharedSizeGroup="SubName" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"
+                                              SharedSizeGroup="SubName" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   Text="{loc:Loc Setup.Ui.MacOS.TitleBarStyle}" />
+                        <ui:MyComboBox x:Name="ComboTitleBarStyle"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Stretch">
+                            <ui:MyComboBoxItem Content="{loc:Loc Setup.Ui.MacOS.TitleBarStyle.Separate}" />
+                            <ui:MyComboBoxItem Content="{loc:Loc Setup.Ui.MacOS.TitleBarStyle.Unified}" />
+                        </ui:MyComboBox>
+                    </Grid>
+                </StackPanel>
+            </ui:MyCard>
+
             <ui:MyCard x:Name="CardFont"
                        Margin="0,0,0,15"
                        Title="{loc:Loc Setup.Ui.Font.Title}">

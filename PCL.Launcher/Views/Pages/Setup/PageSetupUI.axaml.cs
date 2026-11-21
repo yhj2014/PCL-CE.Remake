@@ -6,6 +6,7 @@ using Avalonia.VisualTree;
 using PCL.Core.App;
 using PCL.Core.App.Configuration;
 using PCL.Core.App.Localization;
+using PCL.Core.Platform;
 using PCL.Core.UI;
 using PCL.Core.UI.Hints;
 using PCL.Core.Utils.Validate;
@@ -67,6 +68,10 @@ public partial class PageSetupUI : MyPageRight, ISetupResetPage
             ViewModel.CustomNetText = TextCustomNet.Text ?? string.Empty;
         });
 
+        CardMacOS.IsVisible = ApplicationRuntime.Current.Platform.Capabilities
+            .SupportsTitleBarStyleSelection;
+        ComboTitleBarStyle.SelectionChanged += (_, _) => WriteIfReady(() =>
+            Config.Preference.MacTitleBarStyle = ComboTitleBarStyle.SelectedIndex);
         CheckLockWindowSize.Change += (_, _) => WriteIfReady(() =>
             Config.Preference.LockWindowSize = CheckLockWindowSize.Checked == true);
         CheckShowLaunchingHint.Change += (_, _) => WriteIfReady(() =>
@@ -212,6 +217,7 @@ public partial class PageSetupUI : MyPageRight, ISetupResetPage
         try
         {
             ViewModel.Reload(Math.Max(1, ComboLightColor.ItemCount));
+            ComboTitleBarStyle.SelectedIndex = Math.Clamp(Config.Preference.MacTitleBarStyle, 0, 1);
             CheckLockWindowSize.Checked = Config.Preference.LockWindowSize;
             CheckShowLaunchingHint.Checked = Config.Preference.ShowLaunchingHint;
 
